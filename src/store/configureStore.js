@@ -1,7 +1,11 @@
 // import { createStore } from 'redux'
 // import { devToolsEnhancer } from 'redux-devtools-extension'
-import { configureStore } from '@reduxjs/toolkit'
-import reducer from './reducer'
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
+import reducer from './reducer';
+import logger from './middleware/logger'
+import toast from './middleware/toast';
+//import func from './middleware/func';
+
 
 // export default function configureStore() {
 //     const store = createStore(
@@ -12,5 +16,12 @@ import reducer from './reducer'
 // }
 
 export default function() {
-    return configureStore({ reducer })
+    return configureStore({ 
+        reducer,
+        middleware: [
+            ...getDefaultMiddleware(),
+            logger({ destination: 'console' }),
+            toast
+        ]
+    })
 }
