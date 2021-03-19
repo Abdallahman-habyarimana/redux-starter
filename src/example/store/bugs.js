@@ -37,9 +37,16 @@ const slice = createSlice({
         }
 })
 
-export const  { bugAdded, bugRemoved, bugAssignedToUser, bugResolved } = slice.actions
+export const  { bugAdded, bugRemoved, bugAssignedToUser, bugResolved, bugsReceived } = slice.actions
 export default slice.reducer
 
+
+// Action Creators
+const url = "/bugs"
+export const loadBugs = () => apiCallBegan({
+    url,
+    onSuccess: bugsReceived.type,
+})
 // selector
 //export const getUnresolvedBugs = state => state.entities.bugs.filter(bug => !bug.resolved)
 
